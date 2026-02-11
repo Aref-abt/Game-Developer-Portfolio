@@ -168,8 +168,8 @@ function GameCard({ game, index }: { game: Game; index: number }) {
           </div>
 
           {/* Gallery Thumbnails */}
-          <div className="border-t border-border bg-secondary/30 p-3">
-            <div className="flex gap-2 overflow-x-auto">
+          <div className="border-t border-border bg-secondary/30 p-2 sm:p-3">
+            <div className="flex gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide">
               {game.gallery.slice(0, 6).map((img, i) => (
                 <button
                   key={i}
@@ -177,7 +177,7 @@ function GameCard({ game, index }: { game: Game; index: number }) {
                     setCurrentImageIndex(i)
                     setShowGallery(true)
                   }}
-                  className="relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-lg border-2 border-border transition-all hover:border-primary hover:scale-105"
+                  className="relative h-14 w-20 sm:h-16 sm:w-24 flex-shrink-0 overflow-hidden rounded-lg border-2 border-border transition-all hover:border-primary hover:scale-105"
                 >
                   <Image
                     src={img}
@@ -353,7 +353,7 @@ function GameCard({ game, index }: { game: Game; index: number }) {
 
 export function GamesSection() {
   return (
-    <section id="games" className="relative px-4 py-20 sm:px-6 sm:py-32">
+    <section id="games" className="relative overflow-hidden px-4 py-20 sm:px-6 sm:py-32">
       {/* Background accent */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(var(--primary)/0.03),_transparent_70%)]" />
 
@@ -364,7 +364,7 @@ export function GamesSection() {
           description="From atmospheric PC experiences to addictive mobile games, each project is crafted with passion and attention to detail."
         />
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {games.map((game, i) => (
             <GameCard key={game.title} game={game} index={i} />
           ))}
