@@ -2,8 +2,15 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { Github, ExternalLink, Wrench, Clock, ArrowUpRight } from "lucide-react"
+import { Github, ExternalLink, Wrench, Clock, ArrowUpRight, Camera, Zap, Target } from "lucide-react"
 import { SectionHeader } from "./section-header"
+
+interface CameraFeature {
+  name: string
+  icon: "camera" | "zap" | "target"
+  description: string
+  highlights: string[]
+}
 
 interface Tool {
   title: string
@@ -12,27 +19,71 @@ interface Tool {
   githubUrl?: string
   status: "released" | "coming-soon"
   tags: string[]
+  features?: CameraFeature[]
 }
+
+const cameraFeatures: CameraFeature[] = [
+  {
+    name: "Asymptotic Camera Follow",
+    icon: "camera",
+    description: "Smoothly follows a target using weighted asymptotic equations without instant snapping",
+    highlights: [
+      "Frame-rate independent (works with TimeScale ≠ 1)",
+      "Organic adaptive speed: slower when near, faster when far",
+      "Configurable positional offset & convergence weights",
+      "Works in both 2D and 3D",
+    ],
+  },
+  {
+    name: "Perlin Noise Camera Shake",
+    icon: "zap",
+    description: "Generates organic camera shake using Perlin noise for believable motion",
+    highlights: [
+      "Smoother, less jittery than traditional random shake",
+      "Customizable frequency, intensity, and attenuation",
+      "Supports positional and/or rotational shake",
+      "Save presets in ShakeProfile ScriptableObjects",
+    ],
+  },
+  {
+    name: "Dynamic Camera Framing",
+    icon: "target",
+    description: "Auto-adjusts camera to keep multiple points of interest in view",
+    highlights: [
+      "Weighted averaging based on importance & distance",
+      "Perfect for multiplayer, boss fights, puzzles",
+      "Create cinematic closeups by lerping importance",
+      "Supports mid-gameplay parameter changes",
+    ],
+  },
+]
 
 const tools: Tool[] = [
   {
-    title: "Advanced Camera Tools",
+    title: "Advanced Camera Systems for Unity",
     description:
-      "A powerful, flexible camera system for Unity that provides advanced camera behaviors, smooth transitions, and cinematic capabilities out of the box. Perfect for any game genre.",
-    image: "/images/tool-camera.jpg",
-    githubUrl: "https://github.com/richani-yvan/",
+      "A collection of modular camera systems built for responsive gameplay and visual feedback. Focuses on smooth motion, readable framing, and expressive feedback without hard snapping or jitter.",
+    image: "/images/tool-camera.png",
+    githubUrl: "https://github.com/richani-yvan/CameraTools",
     status: "released",
     tags: ["Unity", "C#", "Open Source", "Camera System"],
+    features: cameraFeatures,
   },
   {
     title: "Flexible Weighted Probability System",
     description:
       "An elegant solution for weighted random selection in games. Configure probability distributions with an intuitive API, perfect for loot tables, spawn systems, and procedural generation.",
-    image: "/images/tool-probability.jpg",
+    image: "/images/tool-proba.png",
     status: "coming-soon",
     tags: ["Unity", "C#", "Probability", "Game Systems"],
   },
 ]
+
+function FeatureIcon({ icon }: { icon: "camera" | "zap" | "target" }) {
+  if (icon === "camera") return <Camera className="h-5 w-5" />
+  if (icon === "zap") return <Zap className="h-5 w-5" />
+  return <Target className="h-5 w-5" />
+}
 
 function ToolCard({ tool, index }: { tool: Tool; index: number }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -98,6 +149,26 @@ function ToolCard({ tool, index }: { tool: Tool; index: number }) {
                 </div>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{tool.description}</p>
+
+              {/* Camera Features Quick Preview */}
+              {tool.features && (
+                <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                  {tool.features.map((feature) => (
+                    <div
+                      key={feature.name}
+                      className="rounded-lg border border-border bg-secondary/30 p-3 transition-colors hover:bg-secondary/50"
+                    >
+                      <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10 text-primary">
+                          <FeatureIcon icon={feature.icon} />
+                        </div>
+                        <span className="line-clamp-1">{feature.name.split(" ").slice(-2).join(" ")}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {/* Tags */}
               <div className="mt-4 flex flex-wrap gap-2">
                 {tool.tags.map((tag) => (
@@ -124,13 +195,15 @@ function ToolCard({ tool, index }: { tool: Tool; index: number }) {
                   <ExternalLink className="h-3 w-3 opacity-50" />
                 </a>
               )}
-              <button
-                onClick={() => setShowPreview(true)}
-                className="flex items-center gap-2 rounded-xl border border-border px-4 py-2 text-xs font-medium text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:text-primary hover:shadow-md sm:px-5 sm:py-2.5 sm:text-sm"
-              >
-                Preview
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </button>
+              {tool.features && (
+                <button
+                  onClick={() => setShowPreview(true)}
+                  className="flex items-center gap-2 rounded-xl border border-border px-4 py-2 text-xs font-medium text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:text-primary hover:shadow-md sm:px-5 sm:py-2.5 sm:text-sm"
+                >
+                  Learn More
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -147,7 +220,7 @@ function ToolCard({ tool, index }: { tool: Tool; index: number }) {
           aria-label={`${tool.title} preview`}
         >
           <div
-            className="relative max-h-[90vh] w-full max-w-3xl animate-bounce-in overflow-y-auto rounded-t-3xl bg-card shadow-2xl sm:rounded-3xl"
+            className="relative max-h-[90vh] w-full max-w-4xl animate-bounce-in overflow-y-auto rounded-t-3xl bg-card shadow-2xl sm:rounded-3xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative aspect-video w-full">
@@ -158,10 +231,60 @@ function ToolCard({ tool, index }: { tool: Tool; index: number }) {
                 className="object-cover"
               />
             </div>
-            <div className="p-6">
-              <h3 className="font-heading text-xl font-bold text-foreground">{tool.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{tool.description}</p>
-              <div className="mt-4 flex items-center gap-3">
+            <div className="p-6 sm:p-8">
+              <h3 className="font-heading text-2xl font-bold text-foreground">{tool.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tool.description}</p>
+
+              {/* Detailed Features */}
+              {tool.features && (
+                <div className="mt-6 space-y-6">
+                  <h4 className="font-heading text-lg font-semibold text-foreground">Included Systems</h4>
+                  {tool.features.map((feature) => (
+                    <div
+                      key={feature.name}
+                      className="rounded-xl border border-border bg-secondary/30 p-5"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                          <FeatureIcon icon={feature.icon} />
+                        </div>
+                        <div className="flex-1">
+                          <h5 className="font-heading text-base font-bold text-foreground">{feature.name}</h5>
+                          <p className="mt-1 text-sm text-muted-foreground">{feature.description}</p>
+                          <ul className="mt-3 space-y-1.5">
+                            {feature.highlights.map((highlight, idx) => (
+                              <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
+                                <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
+                                <span>{highlight}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="rounded-xl border border-primary/20 bg-primary/5 p-5">
+                    <h5 className="font-heading text-sm font-semibold text-foreground">Design Philosophy</h5>
+                    <ul className="mt-2 space-y-1.5">
+                      <li className="flex items-start gap-2 text-xs text-muted-foreground">
+                        <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
+                        <span><strong>Modularity</strong> — Each system works independently and is ready upon import</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-xs text-muted-foreground">
+                        <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
+                        <span><strong>Smoothness</strong> — Avoid jitter and snapping for better player experience</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-xs text-muted-foreground">
+                        <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
+                        <span><strong>Flexibility</strong> — Many customizable public parameters for fine-tuning</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-6 flex items-center gap-3">
                 {tool.githubUrl && (
                   <a
                     href={tool.githubUrl}
@@ -171,6 +294,7 @@ function ToolCard({ tool, index }: { tool: Tool; index: number }) {
                   >
                     <Github className="h-4 w-4" />
                     View on GitHub
+                    <ExternalLink className="h-3 w-3" />
                   </a>
                 )}
                 <button

@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { ExternalLink, Play, X, Monitor, Smartphone } from "lucide-react"
+import { ExternalLink, Play, X, Monitor, Smartphone, ChevronLeft, ChevronRight, Images } from "lucide-react"
 import { SectionHeader } from "./section-header"
 
 interface Game {
   title: string
   description: string
   image: string
+  gallery: string[]
   platforms: { name: string; icon: "steam" | "android" | "ios"; url: string }[]
   trailerUrl?: string
   tags: string[]
@@ -20,11 +21,17 @@ const games: Game[] = [
     title: "A Heavy Morning",
     description:
       "An atmospheric narrative experience exploring the weight of everyday moments. Available on Steam with a cinematic trailer that captures the mood.",
-    image: "/images/game-heavy-morning.jpg",
-    platforms: [
-      { name: "Steam", icon: "steam", url: "#" },
+    image: "/images/heavymorning-2.png",
+    gallery: [
+      "/images/heavymorning-2.png",
+      "/images/heavymorning-3.png",
+      "/images/heavymorning-4.png",
+      "/images/heavymorning-5.png",
     ],
-    trailerUrl: "#",
+    platforms: [
+      { name: "Steam", icon: "steam", url: "https://store.steampowered.com/app/3509400/A_Heavy_Morning/" },
+    ],
+    trailerUrl: "https://www.youtube.com/embed/IXHLSAUZwNE",
     tags: ["Narrative", "Atmospheric", "PC"],
     color: "168 80% 42%",
   },
@@ -32,12 +39,17 @@ const games: Game[] = [
     title: "SweetStacks",
     description:
       "A deliciously fun stacking game where you pile up sweets as high as you can. Colorful, addictive, and satisfying gameplay for mobile.",
-    image: "/images/game-sweetstacks.jpg",
-    platforms: [
-      { name: "Google Play", icon: "android", url: "#" },
-      { name: "App Store", icon: "ios", url: "#" },
+    image: "/images/sweetstacks-1.png",
+    gallery: [
+      "/images/sweetstacks-1.png",
+      "/images/sweetstacks-2.png",
+      "/images/sweetstacks-3.png",
     ],
-    trailerUrl: "#",
+    platforms: [
+      { name: "Google Play", icon: "android", url: "https://play.google.com/store/apps/details?id=com.SunnyMoonProject.SweetStacksV2&hl=en" },
+      { name: "App Store", icon: "ios", url: "https://apps.apple.com/us/app/sweet-stacks-stacking-game/id6749310384" },
+    ],
+    trailerUrl: "https://www.youtube.com/embed/ILWRH6wtkjo",
     tags: ["Casual", "Puzzle", "Mobile"],
     color: "32 95% 55%",
   },
@@ -45,12 +57,20 @@ const games: Game[] = [
     title: "2121",
     description:
       "A futuristic puzzle game set in the year 2121. Navigate through neon-lit challenges in this visually stunning mobile experience.",
-    image: "/images/game-2121.jpg",
-    platforms: [
-      { name: "Google Play", icon: "android", url: "#" },
-      { name: "App Store", icon: "ios", url: "#" },
+    image: "/images/2121-1.png",
+    gallery: [
+      "/images/2121-1.png",
+      "/images/2121-2.png",
+      "/images/2121-3.png",
+      "/images/2121-4.png",
+      "/images/2121-5.png",
+      "/images/2121-6.png",
     ],
-    trailerUrl: "#",
+    platforms: [
+      { name: "Google Play", icon: "android", url: "https://play.google.com/store/apps/details?id=com.beelabs.project21&hl=en_AU" },
+      { name: "App Store", icon: "ios", url: "https://apps.apple.com/us/app/2121-game/id6474293851" },
+    ],
+    trailerUrl: "https://www.youtube.com/embed/vIQqKejDGpM",
     tags: ["Sci-Fi", "Puzzle", "Mobile"],
     color: "200 80% 50%",
   },
@@ -66,6 +86,8 @@ function GameCard({ game, index }: { game: Game; index: number }) {
   const [isVisible, setIsVisible] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [showTrailer, setShowTrailer] = useState(false)
+  const [showGallery, setShowGallery] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -77,6 +99,14 @@ function GameCard({ game, index }: { game: Game; index: number }) {
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [])
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % game.gallery.length)
+  }
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + game.gallery.length) % game.gallery.length)
+  }
 
   return (
     <>
@@ -106,13 +136,22 @@ function GameCard({ game, index }: { game: Game; index: number }) {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             {/* Play overlay */}
-            <div className="absolute inset-0 flex items-center justify-center bg-foreground/0 transition-all duration-300 group-hover:bg-foreground/30">
+            <div className="absolute inset-0 flex items-center justify-center gap-4 bg-foreground/0 transition-all duration-300 group-hover:bg-foreground/30">
+              {game.trailerUrl && (
+                <button
+                  onClick={() => setShowTrailer(true)}
+                  className="flex h-16 w-16 translate-y-4 items-center justify-center rounded-full bg-primary/90 text-primary-foreground opacity-0 shadow-2xl backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:scale-110 hover:bg-primary"
+                  aria-label={`Play ${game.title} trailer`}
+                >
+                  <Play className="ml-1 h-7 w-7" fill="currentColor" />
+                </button>
+              )}
               <button
-                onClick={() => setShowTrailer(true)}
-                className="flex h-16 w-16 translate-y-4 items-center justify-center rounded-full bg-primary/90 text-primary-foreground opacity-0 shadow-2xl backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:scale-110 hover:bg-primary"
-                aria-label={`Play ${game.title} trailer`}
+                onClick={() => setShowGallery(true)}
+                className="flex h-16 w-16 translate-y-4 items-center justify-center rounded-full bg-secondary/90 text-secondary-foreground opacity-0 shadow-2xl backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:scale-110 hover:bg-secondary"
+                aria-label={`View ${game.title} gallery`}
               >
-                <Play className="ml-1 h-7 w-7" fill="currentColor" />
+                <Images className="h-7 w-7" />
               </button>
             </div>
             {/* Tags */}
@@ -124,6 +163,29 @@ function GameCard({ game, index }: { game: Game; index: number }) {
                 >
                   {tag}
                 </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Gallery Thumbnails */}
+          <div className="border-t border-border bg-secondary/30 p-3">
+            <div className="flex gap-2 overflow-x-auto">
+              {game.gallery.slice(0, 6).map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setCurrentImageIndex(i)
+                    setShowGallery(true)
+                  }}
+                  className="relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-lg border-2 border-border transition-all hover:border-primary hover:scale-105"
+                >
+                  <Image
+                    src={img}
+                    alt={`${game.title} screenshot ${i + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </button>
               ))}
             </div>
           </div>
@@ -163,7 +225,7 @@ function GameCard({ game, index }: { game: Game; index: number }) {
       </div>
 
       {/* Trailer Modal */}
-      {showTrailer && (
+      {showTrailer && game.trailerUrl && (
         <div
           className="fixed inset-0 z-[100] flex items-end justify-center bg-foreground/60 p-0 backdrop-blur-sm sm:items-center sm:p-4"
           onClick={() => setShowTrailer(false)}
@@ -189,12 +251,98 @@ function GameCard({ game, index }: { game: Game; index: number }) {
               </button>
             </div>
             <div className="aspect-video w-full bg-foreground/5">
-              {/* Placeholder for YouTube embed - will be replaced with actual trailer URL */}
-              <div className="flex h-full w-full flex-col items-center justify-center gap-3 text-muted-foreground">
-                <Play className="h-16 w-16 opacity-30" />
-                <p className="text-sm">Trailer video will be embedded here</p>
-                <p className="text-xs opacity-60">YouTube embed coming soon</p>
-              </div>
+              <iframe
+                src={game.trailerUrl}
+                title={`${game.title} trailer`}
+                className="h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Gallery Modal */}
+      {showGallery && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-foreground/80 p-4 backdrop-blur-sm"
+          onClick={() => setShowGallery(false)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") setShowGallery(false)
+            if (e.key === "ArrowLeft") prevImage()
+            if (e.key === "ArrowRight") nextImage()
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${game.title} gallery`}
+        >
+          <div
+            className="relative w-full max-w-5xl animate-bounce-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="font-heading text-lg font-bold text-background">
+                {game.title} - Gallery ({currentImageIndex + 1}/{game.gallery.length})
+              </h3>
+              <button
+                onClick={() => setShowGallery(false)}
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-background/10 text-background backdrop-blur-sm transition-colors hover:bg-background/20"
+                aria-label="Close gallery"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="relative aspect-video overflow-hidden rounded-2xl bg-background shadow-2xl">
+              <Image
+                src={game.gallery[currentImageIndex]}
+                alt={`${game.title} screenshot ${currentImageIndex + 1}`}
+                fill
+                className="object-contain"
+              />
+
+              {/* Navigation arrows */}
+              {game.gallery.length > 1 && (
+                <>
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </button>
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </button>
+                </>
+              )}
+            </div>
+
+            {/* Thumbnail strip */}
+            <div className="mt-4 flex justify-center gap-2 overflow-x-auto pb-2">
+              {game.gallery.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentImageIndex(i)}
+                  className={`relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all hover:scale-105 ${
+                    i === currentImageIndex
+                      ? "border-primary ring-2 ring-primary/50"
+                      : "border-background/30 hover:border-background/60"
+                  }`}
+                >
+                  <Image
+                    src={img}
+                    alt={`${game.title} thumbnail ${i + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </button>
+              ))}
             </div>
           </div>
         </div>

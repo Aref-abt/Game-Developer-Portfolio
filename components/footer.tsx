@@ -40,12 +40,12 @@ export function Footer() {
           {/* Quick links */}
           <div className="flex flex-col items-center gap-3 md:items-start">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Navigate</h3>
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 md:flex-col md:gap-y-3">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 md:flex-col md:items-start md:justify-start md:gap-y-3">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  className="text-sm text-muted-foreground transition-colors hover:text-primary md:text-left"
                 >
                   {link.label}
                 </button>

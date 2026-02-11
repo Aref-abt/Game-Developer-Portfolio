@@ -17,18 +17,18 @@ const achievements: Achievement[] = [
   {
     title: "Won Very Big Indie Pitch",
     description:
-      "Fideo's Adventure won the prestigious Very Big Indie Pitch competition, recognized among the best indie games by industry experts and judges.",
+      "Fideo's Adventure won the prestigious Very Big Indie Pitch competition at Dubai GameExpo Summit, recognized among the best indie games by industry experts and judges.",
     icon: Trophy,
-    link: { label: "Read Article", url: "#" },
+    link: { label: "Read Article", url: "https://www.pocketgamer.biz/fideos-adventure-was-full-of-confidence-and-won-the-very-big-indie-pitch-at-dubai-gameexpo-summit/" },
     stat: "1st Place",
     color: "32 95% 55%",
   },
   {
     title: "Devcom / Gamescom Scholarship",
     description:
-      "Invited to attend Devcom and Gamescom on a scholarship, connecting with top industry professionals and showcasing work on an international stage.",
+      "Attended Devcom and Gamescom on a scholarship, connecting with top industry professionals and showcasing work on an international stage.",
     icon: Award,
-    link: { label: "View on LinkedIn", url: "https://www.linkedin.com/in/yvan-richani/" },
+    link: { label: "View on LinkedIn", url: "https://www.linkedin.com/posts/yvan-richani_devcomgamescom-was-crazy-attended-some-activity-7238919458709213184-OdgJ/" },
     stat: "Invited",
     color: "168 80% 42%",
   },
@@ -37,7 +37,7 @@ const achievements: Achievement[] = [
     description:
       "Ranked 80th out of 1,750 game jam entries in the Brackeys Game Jam 2021.2, demonstrating rapid prototyping skills and creative game design under pressure.",
     icon: Flame,
-    link: { label: "View Submission", url: "#" },
+    link: { label: "View Submission", url: "https://itch.io/jam/brackeys-6/rate/1177896" },
     stat: "Top 5%",
     color: "0 80% 60%",
   },
