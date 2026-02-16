@@ -55,7 +55,7 @@ export function HeroSection() {
               <span className="text-balance">{"Hi, I'm"}</span>
               <br />
               <span className="relative inline-block text-primary">
-                Yvan Al Richani
+                Yvan Richani
                 <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
                   <path d="M2 10C50 4 150 2 298 6" stroke="hsl(var(--primary))" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
                 </svg>
@@ -112,8 +112,8 @@ export function HeroSection() {
                 </a>
               </div>
               <a
-                href="/cv.pdf"
-                download
+                href="/Yvan Richani CV.pdf"
+                download="Yvan Richani CV.pdf"
                 className="flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 active:translate-y-0 sm:ml-1 sm:px-6 sm:py-3"
               >
                 Download CV
@@ -130,7 +130,7 @@ export function HeroSection() {
             <div className="animate-pulse-glow relative h-56 w-56 overflow-hidden rounded-3xl border-2 border-primary/20 sm:h-72 sm:w-72 lg:h-96 lg:w-96">
               <Image
                 src="/images/yvan.png"
-                alt="Yvan Al Richani - Game Developer"
+                alt="Yvan Richani - Game Developer"
                 fill
                 className="object-cover"
                 priority

@@ -66,8 +66,8 @@ export function Navigation() {
             </button>
           ))}
           <a
-            href="/cv.pdf"
-            download
+            href="/Yvan Richani CV.pdf"
+            download="Yvan Richani CV.pdf"
             className="ml-4 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 active:translate-y-0"
           >
             Download CV
@@ -107,8 +107,8 @@ export function Navigation() {
             </button>
           ))}
           <a
-            href="/cv.pdf"
-            download
+            href="/Yvan Richani CV.pdf"
+            download="Yvan Richani CV.pdf"
             className="mt-2 rounded-xl bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25"
           >
             Download CV

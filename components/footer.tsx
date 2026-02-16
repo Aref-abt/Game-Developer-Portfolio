@@ -90,7 +90,7 @@ export function Footer() {
         <div className="mt-12 border-t border-border pt-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-xs text-muted-foreground">
-              {new Date().getFullYear()} Yvan Al Richani. All rights reserved.
+              {new Date().getFullYear()} Yvan Richani. All rights reserved.
             </p>
             <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
               Crafted with <Heart className="h-3 w-3 text-destructive" fill="hsl(var(--destructive))" /> by{" "}

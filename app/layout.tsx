@@ -16,9 +16,9 @@ const _inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Yvan Al Richani | Game Developer',
-  description: 'Portfolio of Yvan Al Richani - Indie game developer, tool creator, and award-winning game designer. Explore games, tools, and achievements.',
-  keywords: ['game developer', 'indie games', 'Unity', 'game design', 'Yvan Al Richani'],
+  title: 'Yvan Richani | Game Developer',
+  description: 'Portfolio of Yvan Richani - Indie game developer, tool creator, and award-winning game designer. Explore games, tools, and achievements.',
+  keywords: ['game developer', 'indie games', 'Unity', 'game design', 'Yvan Richani'],
   icons: [],
 }
 
@@ -38,7 +38,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange={false}
         >
