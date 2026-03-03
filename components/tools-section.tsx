@@ -66,16 +66,16 @@ const tools: Tool[] = [
     image: "/images/tool-camera.png",
     githubUrl: "https://github.com/richani-yvan/CameraTools",
     status: "released",
-    tags: ["Unity", "C#", "Open Source", "Camera System"],
+    tags: ["Unity", "C#", "Cinematic Motions", "Player Guidance"],
     features: cameraFeatures,
   },
   {
-    title: "Flexible Weighted Probability System",
+    title: "Moddable Weighted Probability System",
     description:
-      "An elegant solution for weighted random selection in games. Configure probability distributions with an intuitive API, perfect for loot tables, spawn systems, and procedural generation.",
+      "A flexible system designed to manage the 'illusion of luck' in gameplay. It uses 'probability mods' to shift weights for more controlled randomness—allowing for logic like anti-repetition or context-rolls based on player health.",
     image: "/images/tool-proba.png",
     status: "coming-soon",
-    tags: ["Unity", "C#", "Probability", "Game Systems"],
+    tags: ["Unity", "C#", "Controlled Randomness", "Anti-Frustration Systems"],
   },
 ]
 

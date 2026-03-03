@@ -38,7 +38,7 @@ const games: Game[] = [
   {
     title: "SweetStacks",
     description:
-      "A deliciously fun stacking game where you pile up sweets as high as you can. Colorful, addictive, and satisfying gameplay for mobile.",
+      "A deliciously fun stacking game where you pile up sweets as high as you can, with a colorful level-based story.",
     image: "/images/sweetstacks-1.png",
     gallery: [
       "/images/sweetstacks-1.png",
@@ -50,13 +50,13 @@ const games: Game[] = [
       { name: "App Store", icon: "ios", url: "https://apps.apple.com/us/app/sweet-stacks-stacking-game/id6749310384" },
     ],
     trailerUrl: "https://www.youtube.com/embed/ILWRH6wtkjo",
-    tags: ["Casual", "Puzzle", "Mobile"],
+    tags: ["Casual", "Physics", "Mobile"],
     color: "32 95% 55%",
   },
   {
     title: "2121",
     description:
-      "A futuristic puzzle game set in the year 2121. Navigate through neon-lit challenges in this visually stunning mobile experience.",
+      "A multiplayer educational game that nurtures active citizenship among digitally-savvy youth in the 21st century.",
     image: "/images/2121-1.png",
     gallery: [
       "/images/2121-1.png",
@@ -71,7 +71,7 @@ const games: Game[] = [
       { name: "App Store", icon: "ios", url: "https://apps.apple.com/us/app/2121-game/id6474293851" },
     ],
     trailerUrl: "https://www.youtube.com/embed/vIQqKejDGpM",
-    tags: ["Sci-Fi", "Puzzle", "Mobile"],
+    tags: ["Educational", "Multiplayer", "Mobile"],
     color: "200 80% 50%",
   },
 ]
@@ -120,7 +120,7 @@ function GameCard({ game, index }: { game: Game; index: number }) {
         onMouseLeave={() => setIsHovered(false)}
       >
         <div
-          className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all duration-500 hover:shadow-2xl"
+          className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all duration-500 hover:shadow-2xl"
           style={{
             boxShadow: isHovered
               ? `0 25px 60px -12px hsla(${game.color}, 0.2)`
@@ -191,9 +191,9 @@ function GameCard({ game, index }: { game: Game; index: number }) {
           </div>
 
           {/* Content */}
-          <div className="p-4 sm:p-6">
+          <div className="flex flex-1 flex-col p-4 sm:p-6">
             <h3 className="font-heading text-xl font-bold text-foreground sm:text-2xl">{game.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{game.description}</p>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{game.description}</p>
 
             {/* Platforms */}
             <div className="mt-5 flex flex-wrap items-center gap-2">
@@ -361,7 +361,7 @@ export function GamesSection() {
         <SectionHeader
           badge="Player One Ready"
           title="Games I've Built"
-          description="From atmospheric PC experiences to addictive mobile games, each project is crafted with passion and attention to detail."
+          description="A look at the projects I've led and the code I've written. Some were technical puzzles, others were production marathons—all of them taught me how to ship."
         />
 
         <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">

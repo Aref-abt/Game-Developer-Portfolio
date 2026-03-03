@@ -1,8 +1,7 @@
 export function MarqueeTicker() {
   const items = [
-    "Unity", "C#", "Game Design", "Shader Programming", "Level Design",
-    "Mobile Games", "PC Games", "Indie Dev", "Open Source", "Game Jams",
-    "UI/UX", "Prototyping", "3D", "2D", "Physics Systems",
+    "Project Management", "Value Negotiation", "Unity", "C#", "Game Design",
+    "QA", "Testing", "2D", "3D", "Mobile Games", "PC Games",
   ]
 
   return (

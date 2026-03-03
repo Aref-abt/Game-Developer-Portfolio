@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Github, Linkedin, Mail, ChevronDown, Sparkles } from "lucide-react"
 
-const roles = ["Game Developer", "Tool Creator", "Award Winner", "Indie Dev"]
+const roles = ["Technical Project Manager", "Unity Developer", "Game Designer"]
 
 export function HeroSection() {
   const [currentRole, setCurrentRole] = useState(0)
@@ -48,7 +48,7 @@ export function HeroSection() {
             {/* Greeting badge */}
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-medium text-primary">
               <Sparkles className="h-4 w-4" />
-              <span>Welcome to my world</span>
+              <span>Glad you&apos;re here</span>
             </div>
 
             <h1 className="font-heading text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
@@ -77,9 +77,7 @@ export function HeroSection() {
             </div>
 
             <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground lg:text-lg">
-              I craft immersive gaming experiences and powerful dev tools. 
-              From award-winning indie titles to open-source utilities, 
-              I bring ideas to life through code and creativity.
+              Technical Project Manager and Unity Developer. I rely on my technical background and social leadership to bridge the gap between development and production.
             </p>
 
             {/* Social links */}

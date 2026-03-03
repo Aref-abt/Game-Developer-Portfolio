@@ -33,7 +33,7 @@ export function Footer() {
               </span>
             </button>
             <p className="max-w-xs text-center text-sm text-muted-foreground md:text-left">
-              Indie game developer crafting immersive experiences and developer tools.
+              Technical Project Manager and Unity Developer bridging the gap between development and production.
             </p>
           </div>
 
