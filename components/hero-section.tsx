@@ -127,10 +127,10 @@ export function HeroSection() {
           >
             <div className="animate-pulse-glow relative h-56 w-56 overflow-hidden rounded-3xl border-2 border-primary/20 sm:h-72 sm:w-72 lg:h-96 lg:w-96">
               <Image
-                src="/images/yvan.png"
+                src="/images/yvan-hero.jpg"
                 alt="Yvan Richani - Game Developer"
                 fill
-                className="object-cover"
+                className="object-cover object-right"
                 priority
               />
             </div>
