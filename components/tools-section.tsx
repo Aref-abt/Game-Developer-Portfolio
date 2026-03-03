@@ -63,7 +63,7 @@ const tools: Tool[] = [
     title: "Advanced Camera Systems for Unity",
     description:
       "A collection of modular camera systems built for responsive gameplay and visual feedback. Focuses on smooth motion, readable framing, and expressive feedback without hard snapping or jitter.",
-    image: "/images/tool-camera.png",
+    image: "/images/tool-camera.jpg",
     githubUrl: "https://github.com/richani-yvan/CameraTools",
     status: "released",
     tags: ["Unity", "C#", "Cinematic Motions", "Player Guidance"],
@@ -73,7 +73,7 @@ const tools: Tool[] = [
     title: "Moddable Weighted Probability System",
     description:
       "A flexible system designed to manage the 'illusion of luck' in gameplay. It uses 'probability mods' to shift weights for more controlled randomness—allowing for logic like anti-repetition or context-rolls based on player health.",
-    image: "/images/tool-proba.png",
+    image: "/images/tool-proba.jpg",
     status: "coming-soon",
     tags: ["Unity", "C#", "Controlled Randomness", "Anti-Frustration Systems"],
   },
